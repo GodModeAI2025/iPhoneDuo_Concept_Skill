@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>iPhone Duo UX</title>
-<meta name="description" content="Ein Skill für Claude mit den UI/UX-Regeln für Apps auf dem iPhone Duo: Faltzustände, Leistenachse und -kante, Reserved Regions, Punktmaße und Dynamic Type.">
+<meta name="description" content="Ein Skill für Claude mit den UI/UX- und API-Regeln für das iPhone Duo, gegen das SDK 27.1 geprüft: Leistenachse und -kante, Reserved Regions, Arrangement, Hinge, Punktmaße und Dynamic Type.">
 <style>
   :root {
     --bg: #ffffff;
@@ -76,6 +76,7 @@
   .card { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
   .card h3 { margin-top: 0; font-size: 17px; }
   .card p { margin: 0; font-size: 15px; color: var(--text-dim); }
+  .card code { background: var(--bg); font-size: 13px; }
   .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
   .tags li {
     margin: 0; font-size: 13px; padding: 4px 10px; border-radius: 980px;
@@ -99,7 +100,7 @@
 <header>
   <div class="wrap">
     <h1>iPhone Duo UX</h1>
-    <p class="lede">Ein Skill für Claude mit den UI/UX-Regeln für Apps auf dem iPhone Duo. Faltzustände, Leistenachse und -kante, Reserved Regions, Punktmaße, Dynamic Type — und eine klare Trennung zwischen dem, was Apple dokumentiert, und dem, was kursiert.</p>
+    <p class="lede">Ein Skill für Claude mit den UI/UX- und API-Regeln für das iPhone Duo. Leistenachse und -kante, Reserved Regions, Arrangement, Hinge, Punktmaße, Dynamic Type. Seit dem 18. September 2026 gegen das SDK 27.1 geprüft.</p>
     <div class="actions">
       <a class="btn" href="https://github.com/GodModeAI2025/iPhoneDuo_Concept_Skill">Auf GitHub ansehen</a>
       <a class="btn secondary" href="https://github.com/GodModeAI2025/iPhoneDuo_Concept_Skill/blob/HEAD/iphone-duo-ux/SKILL.md">SKILL.md lesen</a>
@@ -110,12 +111,12 @@
 <section>
   <div class="wrap">
     <h2>Wofür</h2>
-    <p>Das Duo bringt zwei Displays, eine Falz und Leisten mit, die je nach Orientierung die Achse wechseln. Die meisten Fehler in Konzepten und Renderings entstehen an denselben drei Stellen: falsche Punktmaße, Leisten an der falschen Kante, Buttons in der Falz.</p>
-    <p>Der Skill greift, sobald es um Screens, Renderings, Figma- oder Sketch-Frames, Konzepte oder Prüfungen fürs Duo geht. Er liefert die Maße, die Prüflisten und die Stellen, an denen Apple bis heute schweigt.</p>
+    <p>Das Duo bringt zwei Displays, eine Falz und Leisten mit, die je nach Orientierung die Achse wechseln. Die meisten Fehler in Konzepten und Renderings entstehen an denselben Stellen: falsche Punktmaße, Leisten an der falschen Kante, Buttons in der Falz, dazu API-Namen aus Talks und Blogposts, die es im SDK nicht gibt.</p>
+    <p>Der Skill greift, sobald es um Screens, Renderings, Figma- oder Sketch-Frames, Konzepte oder Prüfungen fürs Duo geht. Er liefert die Maße, die belegten API-Namen, die Prüflisten und die Stellen, an denen Apple bis heute schweigt.</p>
     <ul class="tags">
-      <li>Faltzustände</li>
       <li>Reserved Regions</li>
-      <li>ArrangementView</li>
+      <li>Arrangement</li>
+      <li>Hinge</li>
       <li>Vertical Controls</li>
       <li>StandBy</li>
       <li>Widgets</li>
@@ -127,19 +128,22 @@
 
 <section>
   <div class="wrap">
-    <h2>Zwei Dinge, die oft falsch laufen</h2>
+    <h2>Drei Dinge, die oft falsch laufen</h2>
     <div class="cards">
       <div class="card">
         <h3>Die Punktmaße</h3>
-        <p>Innen sind es 669 × 951 pt, nicht 626 × 890. Das System rendert in 3x und skaliert auf das Panel herunter, wie früher bei den Plus-Modellen. Wer mit der alten Zahl rechnet, bekommt falsche Spaltenbreiten und falsche Raster.</p>
+        <p>Innen sind es 669 × 951 pt, nicht 626 × 890. Das Simulatorprofil führt das Innendisplay mit 2007 × 2853 px bei Scale 3, das Panel selbst hat 1878 × 2670 px. Die kursierende Zahl rechnet mit dem Panel statt mit dem Renderpuffer.</p>
       </div>
       <div class="card">
         <h3>Die Leisten</h3>
-        <p>Die Achse hängt an der Orientierung, nicht an der Pose: außen vertikal, innen quer vertikal, innen hochkant horizontal. Die Kante ist die Außenkante, bei einer einzelnen App also rechts.</p>
+        <p>Die Achse hängt an der Orientierung, nicht an der Pose: außen vertikal, innen quer vertikal, innen hochkant horizontal. Die Kante ist die Außenkante, bei einer einzelnen App also rechts. Wählbar ist sie nicht, <code>verticalBarEdge</code> ist readonly.</p>
+      </div>
+      <div class="card">
+        <h3>Die API-Namen</h3>
+        <p><code>toolbarVerticalEdge</code> existiert im SDK 27.1 nicht. <code>ArrangementView</code> und <code>onHingeChange</code> sind dort ebenfalls nicht auffindbar. Der Weg führt über <code>UIArrangementViewController</code> und <code>UIHingeInteraction</code>.</p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
 <section>
   <div class="wrap">
@@ -149,8 +153,8 @@
         <tr><th>Größe</th><th>Wert</th><th>Herkunft</th></tr>
       </thead>
       <tbody>
-        <tr><td>Außendisplay</td><td>1398 × 2034 px · 466 × 678 pt</td><td>Specs, Punktmaß abgeleitet</td></tr>
-        <tr><td>Innendisplay</td><td>2007 × 2853 px · 669 × 951 pt</td><td>App Store Connect, Punktmaß abgeleitet</td></tr>
+        <tr><td>Außendisplay</td><td>1398 × 2034 px · 466 × 678 pt</td><td>Specs und Simulatorprofil</td></tr>
+        <tr><td>Innendisplay</td><td>2007 × 2853 px · 669 × 951 pt</td><td>Simulatorprofil, Scale 3</td></tr>
         <tr><td>Body</td><td>17 / 22 pt</td><td>HIG Typography, Dynamic Type „Large“</td></tr>
         <tr><td>Untergrenze Text</td><td>11 pt</td><td>HIG Typography, Caption 2</td></tr>
         <tr><td>Tippziel</td><td>44 × 44 pt</td><td>HIG Accessibility, auch im Widget</td></tr>
@@ -178,14 +182,14 @@ cp -R iPhoneDuo_Concept_Skill/iphone-duo-ux ~/.claude/skills/</code></pre>
 <section>
   <div class="wrap">
     <h2>Quellenlage</h2>
-    <p>Jede Aussage im Skill trägt eine von vier Kennzeichnungen: belegt, Konzept, offen, korrigiert. Grundlage sind Apples HIG-Seite „Designing for iPhone Duo“, die HIG-Seiten zu Typography, Accessibility, Color und Layout, die Tech Talks 111461 bis 111466, das Newsroom-Material vom 9. September 2026, apple.com/iphone-duo mit den Specs, die Apple Design Resources und die Framework-Referenzen zu iOS 27.</p>
+    <p>Jede Aussage im Skill trägt eine von vier Kennzeichnungen: belegt, Konzept, offen, korrigiert. Grundlage sind Apples HIG-Seiten, die Tech Talks 111461 bis 111466, das Newsroom-Material vom 9. September 2026, apple.com/iphone-duo mit den Specs, die Apple Design Resources und seit dem 18. September 2026 das SDK selbst. Auf einem Mac mit Xcode schlägt die Framework-Schnittstelle jede Seite und jeden Talk: Existiert ein Symbol dort nicht, existiert es nicht.</p>
     <p>Ein offizielles Duo-Kit für Figma oder Sketch gibt es nicht. Wer danach fragt, meint das iOS-27-UI-Kit zusammen mit den Maßen aus dem Skill. Community-Kits und Fold-Repositories sind vor dem SDK entstanden und taugen nicht als Beleg.</p>
   </div>
 </section>
 
 <footer>
   <div class="wrap">
-    <p>Stand: 18. September 2026. Die Quellenlage ändert sich mit jedem SDK-Update.</p>
+    <p>Stand: 18. September 2026, geprüft gegen SDK 27.1. Die Quellenlage ändert sich mit jedem Update.</p>
     <p>iPhone, iPad, Apple Pencil, Figma und Sketch gehören ihren jeweiligen Inhabern. Dieses Projekt steht in keiner Verbindung zu Apple.</p>
   </div>
 </footer>
