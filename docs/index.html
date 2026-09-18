@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>iPhone Duo UX</title>
+<meta name="description" content="Ein Skill für Claude mit den UI/UX-Regeln für Apps auf dem iPhone Duo: Faltzustände, Leistenachse und -kante, Reserved Regions, Punktmaße und Dynamic Type.">
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f5f5f7;
+    --text: #1d1d1f;
+    --text-dim: #545456;
+    --line: #d8d8dc;
+    --accent: #0088ff;
+    --code-bg: #f5f5f7;
+    --mark: #fff3cd;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #000000;
+      --bg-soft: #131316;
+      --text: #f5f5f7;
+      --text-dim: #a1a1a6;
+      --line: #2c2c2f;
+      --accent: #0091ff;
+      --code-bg: #131316;
+      --mark: #3a3212;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; padding: 0 16px; }
+  header { padding: 88px 0 56px; border-bottom: 1px solid var(--line); }
+  h1 { font-size: 40px; line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; font-weight: 700; }
+  .lede { font-size: 21px; line-height: 1.45; color: var(--text-dim); margin: 0 0 28px; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+  .btn {
+    display: inline-block; padding: 10px 18px; border-radius: 980px;
+    font-size: 15px; font-weight: 500; text-decoration: none;
+    background: var(--accent); color: #fff; border: 1px solid var(--accent);
+  }
+  .btn.secondary { background: transparent; color: var(--accent); }
+  .btn:hover { opacity: 0.85; }
+  section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  h2 { font-size: 28px; letter-spacing: -0.01em; margin: 0 0 20px; font-weight: 600; }
+  h3 { font-size: 20px; margin: 32px 0 8px; font-weight: 600; }
+  p { margin: 0 0 16px; }
+  ul { margin: 0 0 16px; padding-left: 22px; }
+  li { margin-bottom: 8px; }
+  a { color: var(--accent); }
+  code, pre {
+    font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 14px;
+  }
+  code { background: var(--code-bg); padding: 2px 6px; border-radius: 5px; }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--line); border-radius: 12px;
+    padding: 16px; overflow-x: auto; line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; }
+  table { width: 100%; border-collapse: collapse; margin: 0 0 16px; font-size: 15px; }
+  th, td { text-align: left; padding: 10px 12px 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-weight: 600; }
+  td:last-child, th:last-child { padding-right: 0; color: var(--text-dim); }
+  .cards { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .card { background: var(--bg-soft); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+  .card h3 { margin-top: 0; font-size: 17px; }
+  .card p { margin: 0; font-size: 15px; color: var(--text-dim); }
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+  .tags li {
+    margin: 0; font-size: 13px; padding: 4px 10px; border-radius: 980px;
+    border: 1px solid var(--line); color: var(--text-dim);
+  }
+  .note { background: var(--bg-soft); border-left: 3px solid var(--accent); border-radius: 0 10px 10px 0; padding: 16px 18px; margin: 0 0 16px; }
+  .note p:last-child { margin: 0; }
+  footer { padding: 40px 0 72px; color: var(--text-dim); font-size: 14px; }
+  footer p { margin: 0 0 8px; }
+  @media (max-width: 560px) {
+    header { padding: 56px 0 40px; }
+    h1 { font-size: 32px; }
+    .lede { font-size: 19px; }
+    section { padding: 40px 0; }
+    h2 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>iPhone Duo UX</h1>
+    <p class="lede">Ein Skill für Claude mit den UI/UX-Regeln für Apps auf dem iPhone Duo. Faltzustände, Leistenachse und -kante, Reserved Regions, Punktmaße, Dynamic Type — und eine klare Trennung zwischen dem, was Apple dokumentiert, und dem, was kursiert.</p>
+    <div class="actions">
+      <a class="btn" href="https://github.com/GodModeAI2025/iPhoneDuo_Concept_Skill">Auf GitHub ansehen</a>
+      <a class="btn secondary" href="https://github.com/GodModeAI2025/iPhoneDuo_Concept_Skill/blob/main/iphone-duo-ux/SKILL.md">SKILL.md lesen</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <h2>Wofür</h2>
+    <p>Das Duo bringt zwei Displays, eine Falz und Leisten mit, die je nach Orientierung die Achse wechseln. Die meisten Fehler in Konzepten und Renderings entstehen an denselben drei Stellen: falsche Punktmaße, Leisten an der falschen Kante, Buttons in der Falz.</p>
+    <p>Der Skill greift, sobald es um Screens, Renderings, Figma- oder Sketch-Frames, Konzepte oder Prüfungen fürs Duo geht. Er liefert die Maße, die Prüflisten und die Stellen, an denen Apple bis heute schweigt.</p>
+    <ul class="tags">
+      <li>Faltzustände</li>
+      <li>Reserved Regions</li>
+      <li>ArrangementView</li>
+      <li>Vertical Controls</li>
+      <li>StandBy</li>
+      <li>Widgets</li>
+      <li>Foundation Models</li>
+      <li>Dynamic Type</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Zwei Dinge, die oft falsch laufen</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Die Punktmaße</h3>
+        <p>Innen sind es 669 × 951 pt, nicht 626 × 890. Das System rendert in 3x und skaliert auf das Panel herunter, wie früher bei den Plus-Modellen. Wer mit der alten Zahl rechnet, bekommt falsche Spaltenbreiten und falsche Raster.</p>
+      </div>
+      <div class="card">
+        <h3>Die Leisten</h3>
+        <p>Die Achse hängt an der Orientierung, nicht an der Pose: außen vertikal, innen quer vertikal, innen hochkant horizontal. Die Kante ist die Außenkante, bei einer einzelnen App also rechts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Maße, die Apple wirklich vorgibt</h2>
+    <table>
+      <thead>
+        <tr><th>Größe</th><th>Wert</th><th>Herkunft</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Außendisplay</td><td>1398 × 2034 px · 466 × 678 pt</td><td>Specs, Punktmaß abgeleitet</td></tr>
+        <tr><td>Innendisplay</td><td>2007 × 2853 px · 669 × 951 pt</td><td>App Store Connect, Punktmaß abgeleitet</td></tr>
+        <tr><td>Body</td><td>17 / 22 pt</td><td>HIG Typography, Dynamic Type „Large“</td></tr>
+        <tr><td>Untergrenze Text</td><td>11 pt</td><td>HIG Typography, Caption 2</td></tr>
+        <tr><td>Tippziel</td><td>44 × 44 pt</td><td>HIG Accessibility, auch im Widget</td></tr>
+        <tr><td>Kontrast</td><td>4,5 : 1 bis 17 pt</td><td>HIG Accessibility, WCAG AA</td></tr>
+        <tr><td>Seitenrand</td><td>16 pt</td><td>Konvention aus dem iOS-27-UI-Kit</td></tr>
+      </tbody>
+    </table>
+    <div class="note">
+      <p>Nicht dokumentiert und deshalb ohne Zahl: Breite der Falzregion, Radien der Displayecken, Maße der seitlichen Dynamic Island, Verhalten der Tastatur in der Buch-Pose.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Installation</h2>
+    <p>Für Claude Code oder Claude Cowork das Verzeichnis in den Skill-Ordner kopieren:</p>
+<pre><code>git clone https://github.com/GodModeAI2025/iPhoneDuo_Concept_Skill.git
+cp -R iPhoneDuo_Concept_Skill/iphone-duo-ux ~/.claude/skills/</code></pre>
+    <p>Projektweit statt benutzerweit: <code>.claude/skills/</code> im Repository ablegen. Für Claude.ai lässt sich der Ordner als ZIP packen und hochladen:</p>
+<pre><code>cd iPhoneDuo_Concept_Skill &amp;&amp; zip -r iphone-duo-ux.zip iphone-duo-ux</code></pre>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <h2>Quellenlage</h2>
+    <p>Jede Aussage im Skill trägt eine von vier Kennzeichnungen: belegt, Konzept, offen, korrigiert. Grundlage sind Apples HIG-Seite „Designing for iPhone Duo“, die HIG-Seiten zu Typography, Accessibility, Color und Layout, die Tech Talks 111461 bis 111466, das Newsroom-Material vom 9. September 2026, apple.com/iphone-duo mit den Specs, die Apple Design Resources und die Framework-Referenzen zu iOS 27.</p>
+    <p>Ein offizielles Duo-Kit für Figma oder Sketch gibt es nicht. Wer danach fragt, meint das iOS-27-UI-Kit zusammen mit den Maßen aus dem Skill. Community-Kits und Fold-Repositories sind vor dem SDK entstanden und taugen nicht als Beleg.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>Stand: 18. September 2026. Die Quellenlage ändert sich mit jedem SDK-Update.</p>
+    <p>iPhone, iPad, Apple Pencil, Figma und Sketch gehören ihren jeweiligen Inhabern. Dieses Projekt steht in keiner Verbindung zu Apple.</p>
+  </div>
+</footer>
+
+</body>
+</html>
